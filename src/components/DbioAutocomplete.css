@@ -1,0 +1,68 @@
+.autocomplete-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+}
+
+.autocomplete-wrapper.centered {
+    margin: 0 auto;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+}
+
+.input-group:focus-within {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+}
+
+.search-icon {
+    color: var(--text-muted);
+    margin-right: 12px;
+}
+
+.search-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    outline: none;
+    width: 100%;
+}
+
+.search-input::placeholder {
+    color: var(--text-muted);
+}
+
+.suggestions-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 8px;
+    list-style: none;
+    padding: 8px 0;
+    border-radius: 12px;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 50;
+    box-shadow: var(--shadow-lg);
+}
+
+.suggestion-item {
+    padding: 12px 20px;
+    cursor: pointer;
+    color: var(--text-primary);
+    transition: background 0.1s;
+}
+
+.suggestion-item:hover {
+    background: var(--bg-surface-hover);
+    color: var(--color-primary);
+}
