@@ -1,7 +1,5 @@
-
 import React, { useState } from 'react';
 import { ChevronRight, ChevronDown, Database, Code } from 'lucide-react';
-import './TreeNode.css';
 
 const TreeNode = ({ node, selectedId, onSelect, level = 1 }) => {
     const [isExpanded, setIsExpanded] = useState(level <= 2);
@@ -18,30 +16,49 @@ const TreeNode = ({ node, selectedId, onSelect, level = 1 }) => {
     };
 
     return (
-        <div className="tree-node" style={{ paddingLeft: `${(level - 1) * 12}px` }}>
+        <div className="select-none">
             <div
-                className={`node-content ${isSelected ? 'selected' : ''}`}
+                className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-all duration-200 group
+                    ${isSelected
+                        ? 'bg-brand text-white shadow-md shadow-brand/20'
+                        : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'}
+                `}
+                style={{ marginLeft: `${(level - 1) * 12}px` }}
                 onClick={handleClick}
             >
-                <span className="toggle-icon" onClick={hasChildren ? handleToggle : undefined}>
+                <div
+                    className={`flex items-center justify-center w-4 h-4 rounded transition-colors
+                        ${hasChildren ? 'hover:bg-black/5' : ''}
+                    `}
+                    onClick={hasChildren ? handleToggle : undefined}
+                >
                     {hasChildren && (
                         isExpanded ? <ChevronDown size={14} /> : <ChevronRight size={14} />
                     )}
-                    {!hasChildren && <span className="spacer" />}
-                </span>
+                </div>
 
-                <span className="node-icon">
-                    {level === 1 ? <Database size={14} className="icon-root" /> : <Code size={14} className="icon-sub" />}
-                </span>
+                <div className={`
+                    ${isSelected ? 'text-white' : 'text-slate-400 group-hover:text-brand'}
+                `}>
+                    {level === 1 ? <Database size={14} /> : <Code size={14} />}
+                </div>
 
-                <span className="node-title">
-                    <span className="node-id">{node.id}</span>
-                    <span className="node-label">{node.title}</span>
-                </span>
+                <div className="flex flex-col min-w-0">
+                    <span className={`text-[10px] font-mono font-bold leading-none mb-0.5
+                        ${isSelected ? 'text-white/70' : 'text-slate-400'}
+                    `}>
+                        {node.id}
+                    </span>
+                    <span className={`text-xs font-medium truncate
+                        ${isSelected ? 'text-white' : 'text-slate-700'}
+                    `}>
+                        {node.title}
+                    </span>
+                </div>
             </div>
 
             {hasChildren && isExpanded && (
-                <div className="node-children">
+                <div className="mt-0.5">
                     {node.children.map(child => (
                         <TreeNode
                             key={child.id}

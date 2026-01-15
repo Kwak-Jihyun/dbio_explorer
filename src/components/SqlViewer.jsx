@@ -1,7 +1,6 @@
-
 import React, { useEffect } from 'react';
 import Prism from 'prismjs';
-import 'prismjs/themes/prism.css';
+import 'prismjs/themes/prism-tomorrow.css';
 import 'prismjs/components/prism-sql';
 
 const SqlViewer = ({ sql }) => {
@@ -10,15 +9,9 @@ const SqlViewer = ({ sql }) => {
     }, [sql]);
 
     return (
-        <div className="sql-viewer" style={{
-            borderRadius: '8px',
-            overflow: 'hidden',
-            background: '#f8f9fa',
-            height: '100%',
-            border: '1px solid var(--border-color)'
-        }}>
-            <pre style={{ margin: 0, height: '100%', overflow: 'auto', padding: '16px' }}>
-                <code className="language-sql">
+        <div className="h-full w-full bg-[#2d2d2d] selection:bg-brand/30">
+            <pre className="m-0 h-full overflow-auto p-6 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent">
+                <code className="language-sql block text-sm font-mono leading-relaxed">
                     {sql}
                 </code>
             </pre>
