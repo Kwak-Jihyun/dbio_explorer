@@ -12,13 +12,13 @@ const SQL_SAMPLES = {
 FROM users 
 WHERE status = 'ACTIVE' 
   AND created_at > '2023-01-01';`,
-  
+
   join: `SELECT u.id, u.name, o.order_date, o.amount
 FROM users u
 JOIN orders o ON u.id = o.user_id
 WHERE o.status = 'COMPLETED'
 ORDER BY o.order_date DESC;`,
-  
+
   complex: `WITH MonthlyStats AS (
     SELECT 
         DATE_TRUNC('month', created_at) as month,
@@ -63,7 +63,7 @@ export const DBIO_DETAILS = {
           title: 'Fetch Active Subscriptions',
           level: 2,
           children: [
-             { id: '1.2.1', title: 'Filter Expired Subs', level: 3, children: [] }
+            { id: '1.2.1', title: 'Filter Expired Subs', level: 3, children: [] }
           ]
         }
       ]
@@ -138,15 +138,15 @@ export const getSimilarQueries = (subqueryId, sourceDbioName) => {
   // Generate 10 random-ish results
   const results = [];
   const sourceTitle = DBIO_DETAILS[sourceDbioName]?.queries[subqueryId]?.title || "Unknown Query";
-  
+
   for (let i = 0; i < 10; i++) {
     const randomDbio = DBIO_NAMES[Math.floor(Math.random() * DBIO_NAMES.length)];
     const score = (98.5 - (i * 2.3) + (Math.random())).toFixed(2);
-    
+
     results.push({
       id: `sim_${i}`,
       dbioName: randomDbio,
-      title: `Similar Logic: ${randomDbio}_sub${i}`,
+      title: `한글 제목 ${randomDbio}_sub${i}`,
       description: `This query in ${randomDbio} shares similar structural patterns with the selected subquery. It uses similar joins and filters.`,
       sql: i % 2 === 0 ? SQL_SAMPLES.join : SQL_SAMPLES.complex,
       score: score
